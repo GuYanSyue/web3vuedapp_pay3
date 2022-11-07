@@ -1,0 +1,26 @@
+@media only screen and (max-width: 480px) {
+    .hide {
+        display: none;
+    }
+}
+@media only screen and (min-width: 481px) {
+    .show {
+        display: none;
+    }
+}
+.tit1{
+    font-family: DFkai-sb, sans-serif;
+    font-size: 1.8rem;
+    /*color: darkblue;*/
+}
+.img-mid{
+    width: 80%; 
+    margin: 0 auto;
+}
+.MsoNormal{
+    font-family: DFkai-sb, sans-serif;
+    font-size: 16px;
+    /*color: darkblue;*/
+    /*float: left;*/
+    white-space: pre-wrap;
+}

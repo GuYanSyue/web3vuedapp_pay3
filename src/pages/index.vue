@@ -1,57 +1,76 @@
 <script setup lang="ts">
-const user = useUserStore()
-const name = $ref(user.savedName)
+import { storeToRefs } from 'pinia'
+import { ref } from 'vue'
+import crypto_, { useCryptoStore } from '../store/crypto'
 
-const router = useRouter()
-const go = () => {
-  if (name)
-    router.push(`/hi/${encodeURIComponent(name)}`)
-}
+// 引用crypto.vue的const宣告變數
+// import crypto_ from '../store/user'
 
-const { t } = useI18n()
+const defineStore = useCryptoStore()
+const { deposit, itemcost, connectWallet, new_onSign, new_count } = useCryptoStore()
+const { account, showTWDtoGwei, TWDtoEth, showdepositTxn, count } = storeToRefs(defineStore)
+
+const getAmount = ref(0)
 </script>
 
 <template>
-  <div>
-    <div text-4xl>
-      <div i-carbon-campsite inline-block />
+  <div class="flex flex-col items-center">
+    <h1 class="text-2xl m-4">
+      Payment
+    </h1>
+    <div v-if="!account">
+      <P class="MsoNormal">～～。鍋兒滾付款。～～</P><br>
+      <P class="MsoNormal">點擊下方橙色按鈕連結錢包登入付款</P><br>
+      <p>Only for Metamask --Goerli network.</p>
     </div>
-    <p>
-      <a rel="noreferrer" href="https://github.com/antfu/vitesse" target="_blank">
-        Vitesse
-      </a>
-    </p>
-    <p>
-      <em text-sm opacity-75>{{ t('intro.desc') }}</em>
-    </p>
+    <button v-if="!account" class="bg-amber-600 rounded p-4" @click="connectWallet">
+      Connect Wallet
+    </button>
 
-    <div py-4 />
-
-    <input
-      id="input"
-      v-model="name"
-      :placeholder="t('intro.whats-your-name')"
-      :aria-label="t('intro.whats-your-name')"
-      type="text"
-      autocomplete="false"
-      p="x4 y2"
-      w="250px"
-      text="center"
-      bg="transparent"
-      border="~ rounded gray-200 dark:gray-700"
-      outline="none active:none"
-      @keydown.enter="go"
-    >
-    <label class="hidden" for="input">{{ t('intro.whats-your-name') }}</label>
-
-    <div>
-      <button
-        btn m-3 text-sm
-        :disabled="!name"
-        @click="go"
+    <div v-if="account" class="border shadow w-4/12 p-4 mt-10">
+      <P class="MsoNormal" style="font-size: 1.5rem;">～～。鍋兒滾付款。～～</P><br>
+      <input
+        v-model="getAmount"
+        :style="{ width: '100px' }"
+        name="AmountInfo"
+        class="py-4 px-4 shadow border rounded"
+        maxlength="15"
       >
-        {{ t('button.go') }}
+
+      <button class="bg-slate-600 rounded p-4 mt-10" @click="itemcost(getAmount)">
+        確定金額
       </button>
+
+      <p>Show TWD to Gwei: {{ showTWDtoGwei }}</p>
+
+      <button class="bg-cyan-600 rounded p-4 mt-10" @click="new_onSign(getAmount)">
+        確認簽名
+      </button>
+      <div style="word-break: break-all;">
+        <p class="m-4">
+          Signature : {{ crypto_.Sig }}
+        </p>
+        <p>nonce: {{ count }}</p>
+      </div>
+
+      <button class="bg-cyan-400 rounded p-4 mt-10" @click="deposit(getAmount)">
+        確認付款
+      </button>
+
+      <p>Show TWD to Eth: {{ TWDtoEth }}</p>
+      <p>{{ showdepositTxn }}</p>
+
+      <!-- <button class="bg-slate-600 rounded p-4 mt-10" @click="new_count()">
+        更新count
+      </button> -->
+    </div>
+
+    <div v-if="account && crypto_.Onlyowner === account" class="border shadow w-4/12 p-4 mt-10">
+      <p style="font-size: 1.5rem;">Hello, owner !</p><br>
+      <p>沒事最好不要手濺按底下按鈕</p>
+      <button class="bg-red-500 rounded p-4 mt-10" @click="new_count()">
+        nonce +1
+      </button><p> &emsp;</p>
     </div>
   </div>
 </template>
