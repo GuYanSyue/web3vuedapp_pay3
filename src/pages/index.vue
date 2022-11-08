@@ -8,7 +8,7 @@ import crypto_, { useCryptoStore } from '../store/crypto'
 
 const defineStore = useCryptoStore()
 const { deposit, itemcost, connectWallet, new_onSign, new_count } = useCryptoStore()
-const { account, showTWDtoGwei, TWDtoEth, showdepositTxn, count } = storeToRefs(defineStore)
+const { account, showTWDtoGwei, TWDtoEth, count } = storeToRefs(defineStore)
 
 const getAmount = ref(0)
 </script>
@@ -37,11 +37,11 @@ const getAmount = ref(0)
         maxlength="15"
       >
 
-      <button class="bg-slate-600 rounded p-4 mt-10" @click="itemcost(getAmount)">
+      <button class="bg-slate-500 rounded p-4 mt-10" @click="itemcost(getAmount)">
         確定金額
       </button>
-
-      <p>Show TWD to Gwei: {{ showTWDtoGwei }}</p>
+      <p>輸入單位: TWD</p>
+      <p>Show TWD to Gwei: {{ showTWDtoGwei }} gwei</p>
 
       <button class="bg-cyan-600 rounded p-4 mt-10" @click="new_onSign(getAmount)">
         確認簽名
@@ -57,8 +57,8 @@ const getAmount = ref(0)
         確認付款
       </button>
 
-      <p>Show TWD to Eth: {{ TWDtoEth }}</p>
-      <p>{{ showdepositTxn }}</p>
+      <p>Show TWD to Eth: {{ TWDtoEth }} ether</p>
+      <p> &emsp;</p>
 
       <!-- <button class="bg-slate-600 rounded p-4 mt-10" @click="new_count()">
         更新count
