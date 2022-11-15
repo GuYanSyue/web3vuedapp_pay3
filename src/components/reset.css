@@ -10,7 +10,7 @@
 }
 @media only screen and (max-width: 768px) {
     .outsidebox {
-        width: 320px;
+        width: 340px;
         text-align: center;
         margin-top: 10px;
         padding: 10px;
@@ -27,10 +27,14 @@
     }
 }
 
+p {
+    word-break: break-all;
+}
 .tit1{
     font-family: DFkai-sb, sans-serif;
-    font-size: 1.8rem;
+    font-size: 1.9rem;
     /*color: darkblue;*/
+    white-space: pre-wrap;
 }
 .img-mid{
     width: 80%; 
@@ -38,7 +42,7 @@
 }
 .MsoNormal{
     font-family: DFkai-sb, sans-serif;
-    font-size: 16px;
+    font-size: 1.2rem;
     /*color: darkblue;*/
     /*float: left;*/
     white-space: pre-wrap;
@@ -48,4 +52,15 @@
     width: 100%;
     height: 1px;
     border-top: solid #6a6e72a9 2px;
+}
+.b-color {
+    color: rgb(255, 255, 255);
+}
+.box {
+    text-align: left;
+    margin: 10px;
+}
+.tit2 {
+    font-size: 1.5rem;
+    color: Red;
 }
