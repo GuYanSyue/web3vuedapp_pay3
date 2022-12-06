@@ -1,0 +1,129 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-image:  url(https://imgur.com/5AaRBXT.jpg);
+    max-width:100%;
+    height: 250px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+.overlay{
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    height: 100%;
+    right: 0;
+    bottom: 0;
+    padding: 0 !important;
+    margin: 0 !important;
+ background-color: rgba(10, 10, 10, 0.3);
+ }
+
+ nav{
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 2;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 50px 60px 0 60px;
+}
+
+nav li{
+    list-style: none;
+    display: inline-block;
+    padding-right: 15px;
+    padding-left: 10px;
+ 
+}
+
+nav li span{
+    padding-left: 5px;
+
+}
+
+li a{
+    padding: 15px;
+    background-color: rgb(249, 212, 164);
+    text-decoration: none;
+    border-radius: 20px; 
+}
+
+table{
+    border-collapse: collapse;
+    width:1000px;
+    margin:100px auto 0;
+}
+
+table td{
+    border:2px solid rgb(239, 213, 107);
+}
+
+table tr td{
+    width: 250px;
+    height: 100px;
+    text-align: center;
+}
+
+table tr.title td{
+    height: 50px;
+    background: rgb(240, 187, 127);
+    color:brown;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+table tr td.number span{
+    display: inline-block;
+    font-size: 25px;
+    width: 30px;
+    text-align: center;
+}
+
+table tr td.number span.down,
+table tr td.number span.add{
+    width: 25px;
+    height: 30px;
+    background: rgb(250, 199, 121);
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 35px;
+    cursor: pointer;
+}
+
+.box{
+    width: 1000px;
+    height: 50px;
+    background: rgb(240, 187, 127);
+    margin: 10px auto;
+}
+
+.box p{
+    float: right;
+    width: 250px;
+    height: 50px;
+    line-height: 50px;
+    color: brown;
+    font-size: 20px;
+}
+
+.box p span{
+    color:rgb(11, 9, 1);
+    font-size: 25px;
+    font-weight: bold;
+}
+
+
+
+
+
+
+

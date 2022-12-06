@@ -1,111 +1,91 @@
-<!-- eslint-disable vue/singleline-html-element-content-newline -->
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
-import { ref } from 'vue'
 import crypto_, { useCryptoStore } from '../store/crypto'
 
-// 引用crypto.vue的const宣告變數
-// import crypto_ from '../store/user'
-
 const defineStore = useCryptoStore()
-const { deposit, itemcost, connectWallet, new_onSign, new_count } = useCryptoStore()
-const { discount, showTWDtoEth, showDisGwei, sum, disSum, account, showTWDtoGwei, TWDtoEth, count } = storeToRefs(defineStore)
-
-const getAmount = ref(0)
-// const checked = ref(true)
+const { addItem, downItem } = useCryptoStore()
+const { quantity, price, quantity2, price2, quantity3, price3, quantity4, price4, addItem_Sum } = storeToRefs(defineStore)
 </script>
 
 <template>
-  <div class="flex flex-col items-center">
-    <p class="text-2xl m-4" style="font-size: 2.3rem;">Payment</p>
+  <header>
+    <div class="overlay" />
+    <nav>
+      <u><b> <font color="#FFD39B" size="7">鍋兒滾</font></b></u>
+    </nav>
+  </header>
 
-    <div v-if="!account">
-      <P class="MsoNormal">～～。鍋兒滾付款。～～</P>
-      <P class="MsoNormal">點擊下方橙色按鈕連結錢包登入付款</P><br>
-      <p>Only for Metamask --Goerli network.</p>
+  <table>
+    <tr class="title">
+      <td width="25%">
+        商品
+      </td>
+      <td>名稱</td>
+      <td>價格</td>
+      <td>數量</td>
+      <td>總計</td>
+    </tr>
+    <tr>
+      <td>
+        <img src="https://imgur.com/OWNGUEz.jpg" width="250" height="150">
+      </td>
+      <td>日式鍋</td>
+      <td class="unit">$100</td>
+      <td class="number">
+        <span class="down" @click="downItem(1)">-</span><span class="num">{{ quantity }}</span><span class="add" @click="addItem(1)">+</span>
+      </td>
+      <td class="price">{{ price }}</td>
+    </tr>
+    <tr>
+      <td>
+        <img src="https://imgur.com/OWNGUEz.jpg" width="250" height="150">
+      </td>
+      <td>泡菜鍋</td>
+      <td class="unit">$110</td>
+      <td class="number">
+        <span class="down" @click="downItem(2)">-</span><span class="num">{{ quantity2 }}</span><span class="add" @click="addItem(2)">+</span>
+      </td>
+      <td class="price">{{ price2 }}</td>
+    </tr>
+    <tr>
+      <td>
+        <img src="https://imgur.com/OWNGUEz.jpg" width="250" height="150">
+      </td>
+      <td>牛奶鍋</td>
+      <td class="unit">$120</td>
+      <td class="number">
+        <span class="down" @click="downItem(3)">-</span><span class="num">{{ quantity3 }}</span><span class="add" @click="addItem(3)">+</span>
+      </td>
+      <td class="price">{{ price3 }}</td>
+    </tr>
+    <tr>
+      <td>
+        <img src="https://imgur.com/OWNGUEz.jpg" width="250" height="150">
+      </td>
+      <td>壽喜燒鍋</td>
+      <td class="unit">$130</td>
+      <td class="number">
+        <span class="down" @click="downItem(4)">-</span><span class="num">{{ quantity4 }}</span><span class="add" @click="addItem(4)">+</span>
+      </td>
+      <td class="price">{{ price4 }}</td>
+    </tr>
+  </table>
+
+  <div class="box" style="margin: auto; text-align: center;">
+    <p>已選了 <span class="total-num">{{ addItem_Sum }}</span> 個商品</p>
+    <p>總共: <span class="total-price">{{ crypto_.totalPrice }}</span> $</p>
+  </div><p>&emsp;</p>
+
+  <div style="width: 100%;">
+    <div v-if="addItem_Sum === 0">
+      <button class="bg-slate-500 rounded p-4 b-color w-50">你還沒選擇任何商品噢</button>
     </div>
-    <button v-if="!account" class="bg-amber-600 rounded p-4 b-color" @click="connectWallet">
-      Connect Wallet
-    </button>
-
-    <div v-if="account" class="outsidebox">
-      <P class="tit1"><span class="hide">～</span>～。鍋兒滾付款。～<span class="hide">～</span></P><br>
-
-      <p class="MsoNormal">您持有本店NFT數量為:&nbsp;<span>{{ sum }}</span>&nbsp;個</p>
-
-      <input
-        v-model="getAmount"
-        :style="{ width: '100px' }"
-        name="AmountInfo"
-        class="py-4 px-4 shadow border rounded"
-        maxlength="15"
-      >
-      <button class="bg-slate-500 rounded p-4 mt-10 b-color" @click="itemcost(getAmount)">
-        確定金額
-      </button>
-      <p>(輸入單位: TWD)</p><br>
-      <p>Show TWD to Gwei: {{ showTWDtoGwei }} gwei</p>
-      <p>Show TWD to Ether: {{ showTWDtoEth }} ether</p><br>
-
-      <p> &emsp;</p>
-      <p class="link-top" /><br>
-
-      <div class="MsoNormal" style="border: solid #a9b4bea9 1px;">
-        <p v-if="sum !== 0" class="hide">(持有NFT: {{ sum }}個，可折抵新台幣 {{ disSum }} 元)<br></p>
-        <p v-if="sum !== 0" class="show box">(持有NFT: {{ sum }}個)<br>=> 可折抵新台幣 {{ disSum }} 元<br></p>
-
-        <div class="box">
-          <!-- <input id="checkbox" v-model="checked" type="checkbox">
-          <span class="MsoNormal">&emsp;使用NFT進行折價&emsp;</span> -->
-          <div v-if="sum !== 0">
-            <p class="tit2">會員優惠價:<span class="show"><br>&emsp;&emsp;</span>&emsp;新台幣 {{ discount }} 元</p>
-            <p class="link-top" style="border-top: solid #a9b4bea9 2px;" /><br>
-          </div>
-
-          <p style="font-size: 1.35rem;">付款詳情</p>
-          <p>
-            <br>新台幣付款金額: {{ discount }} 元<br>換算Gwei: {{ showDisGwei }} gwei<br>換算乙太幣: {{ TWDtoEth }} ether
-          </p>
-        </div>
-      </div>
-
-      <div v-if="sum !== 0">
-        <button class="bg-cyan-600 rounded p-4 mt-10 b-color" @click="new_onSign(discount)">
-          確認簽名(會員)
-        </button>
-      </div>
-      <div v-if="sum === 0">
-        <button class="bg-cyan-600 rounded p-4 mt-10 b-color" @click="new_onSign(getAmount)">
-          確認簽名
-        </button>
-      </div>
-      <div class="box">
-        <p class="m-4">Signature : {{ crypto_.Sig }}</p>
-      </div>
-
-      <button class="bg-red-600 rounded p-4 mt-10 b-color" @click="deposit(getAmount)">
-        確認付款
-      </button>
-      <p>Show TWD to Eth: {{ TWDtoEth }} ether</p>
-
-      <p> &emsp;</p>
+    <div v-else>
+      <router-link to="/Buyingcart">
+        <button class="bg-red-600 rounded p-4 b-color w-50">去結帳</button>
+      </router-link><router-view />
     </div>
-
-    <div v-if="account && crypto_.Onlyowner === account" class="outsidebox">
-      <p style="font-size: 1.8rem;">Hello, owner !</p><br>
-
-      <p>非必要沒事最好不要手按底下按鈕</p>
-      <button class="bg-red-500 rounded p-4 mt-10 b-color" @click="new_count()">
-        nonce +1
-      </button><p> &emsp;</p>
-      <div style="word-break: break-all;">
-        <p style="float: right;">nonce: {{ count }} </p>
-      </div>
-    </div>
-  </div>
+  </div><p>&emsp;</p>
 </template>
 
-<route lang="yaml">
-meta:
-  layout: home
-</route>
+<style lang="scss" src="../components/styles.css" scoped></style>
