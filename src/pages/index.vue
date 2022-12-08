@@ -27,7 +27,7 @@ const { quantity, price, quantity2, price2, quantity3, price3, quantity4, price4
     </tr>
     <tr>
       <td>
-        <img src="https://imgur.com/OWNGUEz.jpg" width="250" height="150">
+        <img src="https://imgur.com/aEetXte.jpg" width="250" height="150">
       </td>
       <td>日式鍋</td>
       <td class="unit">$100</td>
@@ -38,7 +38,7 @@ const { quantity, price, quantity2, price2, quantity3, price3, quantity4, price4
     </tr>
     <tr>
       <td>
-        <img src="https://imgur.com/OWNGUEz.jpg" width="250" height="150">
+        <img src="https://imgur.com/GaeRPbT.jpg" width="250" height="150">
       </td>
       <td>泡菜鍋</td>
       <td class="unit">$110</td>
@@ -49,7 +49,7 @@ const { quantity, price, quantity2, price2, quantity3, price3, quantity4, price4
     </tr>
     <tr>
       <td>
-        <img src="https://imgur.com/OWNGUEz.jpg" width="250" height="150">
+        <img src="https://imgur.com/3AfJnr7.jpg" width="250" height="150">
       </td>
       <td>牛奶鍋</td>
       <td class="unit">$120</td>
@@ -60,7 +60,7 @@ const { quantity, price, quantity2, price2, quantity3, price3, quantity4, price4
     </tr>
     <tr>
       <td>
-        <img src="https://imgur.com/OWNGUEz.jpg" width="250" height="150">
+        <img src="https://imgur.com/Eaeg6ie.jpg" width="250" height="150">
       </td>
       <td>壽喜燒鍋</td>
       <td class="unit">$130</td>
@@ -78,7 +78,7 @@ const { quantity, price, quantity2, price2, quantity3, price3, quantity4, price4
 
   <div style="width: 100%;">
     <div v-if="addItem_Sum === 0">
-      <button class="bg-slate-500 rounded p-4 b-color w-50">你還沒選擇任何商品噢</button>
+      <button class="bg-slate-500 rounded p-4 b-color w-50">還沒選擇任何商品噢</button>
     </div>
     <div v-else>
       <router-link to="/Buyingcart">
@@ -86,6 +86,70 @@ const { quantity, price, quantity2, price2, quantity3, price3, quantity4, price4
       </router-link><router-view />
     </div>
   </div><p>&emsp;</p>
+
+  <div class="outsidebox">
+    <div class="itembox">
+      <div class="itempic"><img src="https://imgur.com/aEetXte.jpg"></div>
+      <div class="itemAmount">
+        <div class="itemtit">日式鍋</div>
+        <div class="amount">
+          <p style="margin-bottom: 5px;">$100</p>
+          <span class="down" @click="downItem(1)">-</span><span class="num">&emsp;{{ quantity }}&emsp;</span><span class="add" @click="addItem(1)">+</span>
+          <br><p class="price money">總計:&emsp;{{ price }}元</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="itembox">
+      <div class="itempic"><img src="https://imgur.com/GaeRPbT.jpg"></div>
+      <div class="itemAmount">
+        <div class="itemtit">泡菜鍋</div>
+        <div class="amount">
+          <p style="margin-bottom: 5px;">$110</p>
+          <span class="down" @click="downItem(2)">-</span><span class="num">&emsp;{{ quantity2 }}&emsp;</span><span class="add" @click="addItem(2)">+</span>
+          <br><p class="price money">總計:&emsp;{{ price2 }}元</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="itembox">
+      <div class="itempic"><img src="https://imgur.com/3AfJnr7.jpg"></div>
+      <div class="itemAmount">
+        <div class="itemtit">牛奶鍋</div>
+        <div class="amount">
+          <p style="margin-bottom: 5px;">$120</p>
+          <span class="down" @click="downItem(3)">-</span><span class="num">&emsp;{{ quantity3 }}&emsp;</span><span class="add" @click="addItem(3)">+</span>
+          <br><p class="price money">總計:&emsp;{{ price3 }}元</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="itembox">
+      <div class="itempic"><img src="https://imgur.com/Eaeg6ie.jpg"></div>
+      <div class="itemAmount">
+        <div class="itemtit">壽喜燒鍋</div>
+        <div class="amount">
+          <p style="margin-bottom: 5px;">$130</p>
+          <span class="down" @click="downItem(4)">-</span><span class="num">&emsp;{{ quantity4 }}&emsp;</span><span class="add" @click="addItem(4)">+</span>
+          <br><p class="price money">總計:&emsp;{{ price4 }}元</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="last">
+      <p class="tnum">已選了&emsp;{{ addItem_Sum }}&emsp;個商品 </p>
+      <p class="tnum">總共:&emsp;{{ crypto_.totalPrice }}&emsp;$</p>
+    </div>
+    <div class="link-top"></div>
+    <div v-if="addItem_Sum === 0">
+      <button class="bg-slate-500 rounded p-4 b-color w-50">還沒選擇任何商品噢</button>
+    </div>
+    <div v-if="addItem_Sum !== 0">
+      <router-link to="/Buyingcart">
+        <button class="bg-red-600 rounded p-4 b-color w-50">去結帳</button>
+      </router-link><router-view />
+    </div>
+  </div>
 </template>
 
 <style lang="scss" src="../components/styles.css" scoped></style>

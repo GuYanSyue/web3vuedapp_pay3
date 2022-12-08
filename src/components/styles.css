@@ -1,10 +1,82 @@
-* {
-    margin: 0;
-    padding: 0;
+@media only screen and (min-width: 481px) {
+    .show {
+        display: none;
+    }
+}
+@media only screen and (max-width: 768px) {
+    .hide {
+        display: none;
+    }
+    .outsidebox {
+        width: 100%;
+        height: 990px;
+        /*text-align: center;*/
+        margin-top: 10px;
+        padding: 10px;
+        border: solid 1px;
+    }
+    
+    .itembox {
+        width: 100%;
+        height: 180px;
+        padding: 3px;
+        margin-bottom: 15px;
+        border: solid 1px rgb(112, 111, 108);
+    }
+    .itempic {
+        min-width: 130px;
+        height: 130px;
+        float: left;
+        border: solid 1px orange;
+    }
+    .itemAmount {
+        width: 190px;       
+        float: right;
+        /*border: solid 1px rgb(112, 111, 108);*/
+        padding: 0px 5px 0px 5px;
+    }
+    .itemtit{
+        font-size: 25px;
+        padding: 5px 0px 5px 0px;
+    }
+    .amount {
+        font-size: 20px;
+        line-height: 35px;
+    }
+    .money {
+
+        line-height: 40px;
+        margin: 5px 0px 5px 0px;
+    }
+    .outsidebox .down, .outsidebox .add {
+        color: rgb(31, 35, 41);
+        padding: 0px 5px 0px 5px;
+        background: rgb(249, 197, 119);
+        font-weight: bold;
+        font-size: 28px;
+        line-height: 35px;
+        cursor: pointer;
+    }
+    .tnum {
+        font-size: 20px;
+        line-height: 35px;
+        padding: 5px 0px 5px 0px;
+    }
+    .last {
+        width: 200px;
+        float: right;
+        margin: 5px 10px 5px 0px;
+        border: solid 1px rgba(112, 111, 108, 0);
+    }
+}
+@media only screen and (min-width: 769px) {
+    .outsidebox {
+        display: none;
+    }
 }
 
 header {
-    background-image:  url(https://imgur.com/5AaRBXT.jpg);
+    /*background-image:  url(https://imgur.com/5AaRBXT.jpg);*/
     max-width:100%;
     height: 250px;
     background-repeat: no-repeat;
@@ -22,7 +94,7 @@ header {
     bottom: 0;
     padding: 0 !important;
     margin: 0 !important;
- background-color: rgba(10, 10, 10, 0.3);
+    background-color: rgba(10, 10, 10, 0.3);
  }
 
  nav{
@@ -119,6 +191,16 @@ table tr td.number span.add{
     color:rgb(11, 9, 1);
     font-size: 25px;
     font-weight: bold;
+}
+
+/*---------------------------------*/
+
+.link-top {
+    display: inline-block;
+    width: 90%;
+    height: 1px;
+    margin-bottom: 10px;
+    border-top: solid #6a6e727f 2px;
 }
 
 
